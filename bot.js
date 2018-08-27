@@ -8,6 +8,7 @@ const youtube = new YouTube(GOOGLE_API_KEY);
 
 const queue = new Map();
 const PREFIX = '**';
+const prefix = '**';
 client.on('warn', console.warn);
 
 client.on('error', console.error);
@@ -47,7 +48,7 @@ client.on('message', function(message) {
            msg.delete(5000);
           message.delete(5000);
         });
-    } else if(message.content.startsWith(prefix + "play")) {
+    } else if(message.content.startsWith(prefix + "mplaying")) {
 				        if(message.author.id !== myID) return;
             if(!args) return message.reply('playing الرجاء كتابة حالة');
         client.user.setGame(args);
@@ -517,7 +518,7 @@ client.on("message", async message => {
 
 if (command === `${prefix}join`) {
         message.member.voiceChannel.join()
-    message.channel.send('Okey, joined your voice channel.')
+    message.channel.send('✅ Okey, joined your voice channel.')
 };
 
 });
@@ -531,7 +532,7 @@ client.on("message", async message => {
 
 if (command === `${prefix}leave`) {
         message.member.voiceChannel.leave()
-    message.channel.send('Okey, leaved your voice channel.')
+    message.channel.send('❌ Okey, leaved your voice channel.')
 };
 
 });
