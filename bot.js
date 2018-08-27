@@ -6,8 +6,8 @@ const YouTube = require("simple-youtube-api");
 const fs = require("fs");
 const getYTID = require("get-youtube-id");
 const fetchVideoInfo = require("youtube-info");
-const prefix = botSettings.prefix;
-const ytApiKey = botSettings.ytApiKey;
+const prefix = '*';
+const ytApiKey = 'AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8';
 const youtube = new YouTube(ytApiKey);
 
 const bot = new Discord.Client({
