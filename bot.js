@@ -280,15 +280,15 @@ client.on('message', async msg => { // eslint disable line
             ]
           }
         })
-		if (isNaN(args[1])) return msg.channel.send("Volume value must be a number");
-        if (args[1] > 50) return msg.channel.send(`ماتقدر تحط الصوت فوق 50 `);
+		if (isNaN(args[1])) return msg.channel.send("❌ Volume value must be a number");
+        if (args[1] > 50) return msg.channel.send(`❌ Can not raise the sound more than 50`);
         serverQueue.volume = args[1];
         serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 50);
         return msg.channel.send({embed: {
             color: 15158332,
             fields: [{
                 name: "🔊 Volume",
-                value: `I set the volume to: **${args[1]}**`
+                value: `✅ I set the volume to: **${args[1]}**`
               }
             ]
           }
@@ -337,7 +337,7 @@ client.on('message', async msg => { // eslint disable line
             ]
           }
         })
-        } else if(msg.content.startsWith(`${PREFIX}helphggggggggggggdjhdfghghfghthfghdthedthetyh hhth ththtgh`)) {
+        } else if(msg.content.startsWith(`${PREFIX}help`)) {
         console.log(`${msg.author.tag} has been used the ${PREFIX}help command in ${msg.guild.name}`);
 
         msg.channel.send('Please check your direct messages :inbox_tray:')
@@ -353,6 +353,8 @@ client.on('message', async msg => { // eslint disable line
             fields: [{
                 name: "Bot's commands:",
                 value: `**${PREFIX}help** - This message!\n\
+**${PREFIX}join** - Join your voice channel.\n\
+**${PREFIX}leave** - Leave your voice channel.\n\
 **${PREFIX}play** - Play a song from YouTube.\n\
 **${PREFIX}skip** - Skip a song.\n\
 **${PREFIX}stop** - Stops the music.\n\
@@ -366,7 +368,7 @@ client.on('message', async msg => { // eslint disable line
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© Misaka"
+              text: "Ignit Music"
             }
           }
         });
