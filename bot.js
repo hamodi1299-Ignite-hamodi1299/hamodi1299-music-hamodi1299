@@ -6,7 +6,6 @@ var errorlog = require("./errors.json")
 const yt = require('ytdl-core');
 var RedisSessions = require("redis-sessions");
 var rs = new RedisSessions();
-const token = "process.env.BOT_TOKEN";
 var ffmpeg = require("ffmpeg-binaries");
 var search = require('youtube-search');
 const ddiff = require('return-deep-diff');
