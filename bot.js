@@ -24,7 +24,7 @@ I am logged in and ready to roll!
 LET'S GO!
 
 ----------------------Bot's logs----------------------`);
-
+client.user.setStatus("idle")
 
 });
 
