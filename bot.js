@@ -96,15 +96,15 @@ Please provide a value to select one of the search results ranging from 1-10.
 		serverQueue.songs = [];
 		serverQueue.connection.dispatcher.end('Stop command has been used!');
 		return undefined;
-	} else if (command === 'vol') {
-        if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
-        if (!serverQueue) return msg.channel.send('لا يوجد شيء شغآل.');
-        if (!args[1]) return msg.channel.send(`:loud_sound: مستوى الصوت **${serverQueue.volume}**`);
-        if (isNaN(args[1])) return msg.channel.send("Volume value must be a number");
+	} else if (command === 'volume') {
+		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
+		if (!serverQueue) return msg.channel.send('There is nothing playing.');
+		if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}**`);
+		if (isNaN(args[1])) return msg.channel.send("Volume value must be a number");
         if (args[1] > 50) return msg.channel.send(`ماتقدر تحط الصوت فوق 50 `);
-        serverQueue.volume = args[1];
-        serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 50);
-        return msg.channel.send(`:speaker: تم تغير الصوت الي **${args[1]}**`);
+		serverQueue.volume = args[1];
+		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 50);
+		return msg.channel.send(`I set the volume to: **${args[1]}**`);
 	} else if (command === 'np') {
 		if (!serverQueue) return msg.channel.send('There is nothing playing.');
 		return msg.channel.send(`🎶 Now playing: **${serverQueue.songs[0].title}**`);
@@ -197,6 +197,5 @@ function play(guild, song) {
 
 	serverQueue.textChannel.send(`🎶 Start playing: **${song.title}**`);
 }
-
 
 client.login(process.env.BOT_TOKEN);
