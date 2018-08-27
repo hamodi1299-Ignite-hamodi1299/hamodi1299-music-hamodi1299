@@ -28,6 +28,7 @@ LET'S GO!
 
 });
 
+
 client.on('disconnect', () => console.log('I just disconnected, making sure you know, I will reconnect now...'));
 
 client.on('reconnecting', () => console.log('I am reconnecting now!'));
@@ -438,7 +439,8 @@ function play(guild, song) {
             play(guild, serverQueue.songs[0]);
         })
         .on('error', error => console.log(error));
-    dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
+	serverQueue.volume = '20';
+    dispatcher.setVolumeLogarithmic(serverQueue.volume / 50);
 
     serverQueue.textChannel.send({embed: {
         color: 15158332,
