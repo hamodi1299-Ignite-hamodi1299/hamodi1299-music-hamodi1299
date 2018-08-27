@@ -15,6 +15,52 @@ client.on('ready', () => {
     console.log(`[-] ${client.users.size}`)
     client.user.setStatus("Online")
 });
+
+
+
+client.on("message", message => {
+ if (message.content === "*help") {
+        message.react("😮")
+                message.react("🤒")
+  const embed = new Discord.RichEmbed() 
+      .setColor("#360070")
+      .setThumbnail(message.author.avatarURL)
+      .setDescription(`
+	  
+	  
+● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ● 
+
+🎶『اغاني』🎶
+
+🎶play 『لتشغيل اغنية』
+
+🎶queue 『يظهر قائمة الانتظار الحالية』
+
+🎶skip 『تصويت لتخطي الأغنية الحالية』
+
+🎶pause 『لأقاف الاغنية مؤقتا』
+
+🎶stop 『لأقاف الاغنية』
+
+🎶volume 『لتغير مستوى الصوت』
+
+🎶np 『لمعرفة الاغنية الحالية』
+
+🎶resume 『لتكملة الاغنية』
+
+● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ● 
+
+ <@226262534917849088> | مصمم البوت
+
+
+`)
+
+
+message.author.sendEmbed(embed)
+
+}
+}); 
+
  
 const prefix = "*"
 client.on('message', async msg => {
