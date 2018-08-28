@@ -173,7 +173,7 @@ client.on('message', async msg => { // eslint disable line
                           }
                         ]
                       }
-                    }).then(message =>{message.delete(20000)})
+                    })
                     // eslint-disable-next-line max-depth
                     try {
                         var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
@@ -255,6 +255,15 @@ client.on('message', async msg => { // eslint disable line
         })
         serverQueue.songs = [];
         serverQueue.connection.dispatcher.end('Stop command has been used!');
+		return msg.channel.send({embed: {
+            color: 15158332,
+            fields: [{
+                name: "🛑 Stopped",
+                value: `Okey, **Stopped the song!**`
+              }
+            ]
+          }
+        })
         return undefined;
     } else if (msg.content.startsWith(`${PREFIX}volume`)) {
         console.log(`${msg.author.tag} has been used the ${PREFIX}volume command in ${msg.guild.name}`);
@@ -285,8 +294,24 @@ client.on('message', async msg => { // eslint disable line
             ]
           }
         })
-		if (isNaN(args[1])) return msg.channel.send("❌ Volume value must be a number");
-        if (args[1] > 50) return msg.channel.send(`❌ Can not raise the sound more than 50`);
+		if (isNaN(args[1])) return msg.channel.send({embed: {
+            color: 15158332,
+            fields: [{
+                name: "🔊 Volume",
+                value: `❌ **Volume value must be a number**`
+              }
+            ]
+          }
+        })
+        if (args[1] > 50) return msg.channel.send({embed: {
+            color: 15158332,
+            fields: [{
+                name: "🔊 Volume",
+                value: "❌ **Can not raise the sound more than `50`**"
+              }
+            ]
+          }
+        })
         serverQueue.volume = args[1];
         serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 50);
         return msg.channel.send({embed: {
@@ -327,8 +352,24 @@ client.on('message', async msg => { // eslint disable line
             ]
           }
         })
-		if (isNaN(args[1])) return msg.channel.send("❌ Volume value must be a number");
-        if (args[1] > 50) return msg.channel.send(`❌ Can not raise the sound more than 50`);
+		if (isNaN(args[1])) return msg.channel.send({embed: {
+            color: 15158332,
+            fields: [{
+                name: "🔊 Volume",
+                value: `❌ **Volume value must be a number**`
+              }
+            ]
+          }
+        })
+        if (args[1] > 50) return msg.channel.send({embed: {
+            color: 15158332,
+            fields: [{
+                name: "🔊 Volume",
+                value: "❌ **Can not raise the sound more than `50`**"
+              }
+            ]
+          }
+        })
         serverQueue.volume = args[1];
         serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 50);
         return msg.channel.send({embed: {
@@ -399,17 +440,17 @@ client.on('message', async msg => { // eslint disable line
             },
             fields: [{
                 name: "Bot's commands:",
-                value: `**${PREFIX}help** - This message!\n\
-**${PREFIX}join** - Join your voice channel.\n\
-**${PREFIX}leave** - Leave your voice channel.\n\
-**${PREFIX}play** - Play a song from YouTube.\n\
-**${PREFIX}skip** - Skip a song.\n\
-**${PREFIX}stop** - Stops the music.\n\
-**${PREFIX}volume** - Change the volume of the bot.\n\
-**${PREFIX}np** - The song that now playing.\n\
-**${PREFIX}queue** - See the queue of songs.\n\
-**${PREFIX}pause** - Pause the music.\n\
-**${PREFIX}resume** - Resume the music.`
+                value: `**help** - This message!\n\
+**join** - Join your voice channel.\n\
+**leave** - Leave your voice channel.\n\
+**play** - Play a song from YouTube.\n\
+**skip** - Skip a song.\n\
+**stop** - Stops the music.\n\
+**volume** - Change the volume of the bot.\n\
+**np** - The song that now playing.\n\
+**queue** - See the queue of songs.\n\
+**pause** - Pause the music.\n\
+**resume** - Resume the music.`
               }
             ],
             timestamp: new Date(),
@@ -565,9 +606,25 @@ client.on("message", async message => {
     let command = messageArray[0];
 
 if (command === `${prefix}join`) {
-		if (!message.member.voiceChannel) return message.channel.send('I can\'t find u in any voice channel')
+		if (!message.member.voiceChannel) return message.channel.send({embed: {
+            color: 15158332,
+            fields: [{
+                name: "🔊 Volume",
+                value: '❌ **I can\'t find u in any voice channel**'
+              }
+            ]
+          }
+        })
         message.member.voiceChannel.join()
-    message.channel.send('✅ Okey, joined your voice channel.')
+	message.channel.send({embed: {
+            color: 15158332,
+            fields: [{
+                name: "✅ joine",
+                value: '**Okey, joined your voice channel.**'
+              }
+            ]
+          }
+        })
 };
 
 });
@@ -579,9 +636,26 @@ client.on("message", async message => {
     let command = messageArray[0];
 
 if (command === `${prefix}leave`) {
-		if (!message.member.voiceChannel) return message.channel.send('I can\'t find u in any voice channel')
+		if (!message.member.voiceChannel) return message.channel.send({embed: {
+            color: 15158332,
+            fields: [{
+                name: "❌ Not found",
+                value: '**I can\'t find u in any voice channel**'
+              }
+            ]
+          }
+        })
         message.member.voiceChannel.leave()
-    message.channel.send('❌ Okey, leaved your voice channel.')
+	message.channel.send({embed: {
+            color: 15158332,
+            fields: [{
+                name: "❌ leave",
+                value: '**Okey, leaved your voice channel.**'
+              }
+            ]
+          }
+        })
+		
 };
 
 });
