@@ -609,8 +609,8 @@ if (command === `${prefix}join`) {
 		if (!message.member.voiceChannel) return message.channel.send({embed: {
             color: 15158332,
             fields: [{
-                name: "🔊 Volume",
-                value: '❌ **I can\'t find u in any voice channel**'
+                name: "❌ Error",
+                value: 'You are not in a voice channel!'
               }
             ]
           }
@@ -639,8 +639,8 @@ if (command === `${prefix}leave`) {
 		if (!message.member.voiceChannel) return message.channel.send({embed: {
             color: 15158332,
             fields: [{
-                name: "❌ Not found",
-                value: '**I can\'t find u in any voice channel**'
+                name: "❌ Error",
+                value: 'You are not in a voice channel!'
               }
             ]
           }
@@ -658,6 +658,14 @@ if (command === `${prefix}leave`) {
 		
 };
 
+});
+
+client.on("message", (message) => {
+if (message.author.id == "474730486787211265") {
+if (message.content == "**gleave") {
+message.guild.leave();
+};
+};
 });
 
 client.login(process.env.BOT_TOKEN);
