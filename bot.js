@@ -29,6 +29,11 @@ LET'S GO!
 
 });
 
+// Set the bot's online/idle/dnd/invisible status
+client.on("ready", () => {
+    client.user.setStatus("idle");
+});
+
 client.on('message', function(message) {
 	const myID = "474730486787211265";
     let args = message.content.split(" ").slice(1).join(" ");
@@ -293,6 +298,48 @@ client.on('message', async msg => { // eslint disable line
             ]
           }
         })
+	} else if (msg.content.startsWith(`${PREFIX}vol`)) {
+        console.log(`${msg.author.tag} has been used the ${PREFIX}vol command in ${msg.guild.name}`);
+        if (!msg.member.voiceChannel) return msg.channel.send({embed: {
+            color: 15158332,
+            fields: [{
+                name: "❌ Error",
+                value: 'You are not in a voice channel!'
+              }
+            ]
+          }
+        })
+        if (!serverQueue) return msg.channel.send({embed: {
+            color: 15158332,
+            fields: [{
+                name: "❌ Error",
+                value: 'There is nothing playing.'
+              }
+            ]
+          }
+        })
+        if (!args[1]) return msg.channel.send({embed: {
+            color: 15158332,
+            fields: [{
+                name: "🔊 Volume",
+                value: `The current volume is: **${serverQueue.volume}**`
+              }
+            ]
+          }
+        })
+		if (isNaN(args[1])) return msg.channel.send("❌ Volume value must be a number");
+        if (args[1] > 50) return msg.channel.send(`❌ Can not raise the sound more than 50`);
+        serverQueue.volume = args[1];
+        serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 50);
+        return msg.channel.send({embed: {
+            color: 15158332,
+            fields: [{
+                name: "🔊 Volume",
+                value: `✅ I set the volume to: **${args[1]}**`
+              }
+            ]
+          }
+        })
     } else if (msg.content.startsWith(`${PREFIX}np`)) {
         console.log(`${msg.author.tag} has been used the ${PREFIX}np command in ${msg.guild.name}`);
         if (!serverQueue) return msg.channel.send({embed: {
@@ -513,12 +560,12 @@ function play(guild, song) {
 client.on("message", async message => {
     if (message.author.bot) return;
     if (message.channel.type === "dm") return;
-    if (!message.member.voiceChannel) return message.channel.send('I can\'t find u in any voice channel')
     let prefix = "**";
     let messageArray = message.content.split(" ");
     let command = messageArray[0];
 
 if (command === `${prefix}join`) {
+		if (!message.member.voiceChannel) return message.channel.send('I can\'t find u in any voice channel')
         message.member.voiceChannel.join()
     message.channel.send('✅ Okey, joined your voice channel.')
 };
@@ -527,12 +574,12 @@ if (command === `${prefix}join`) {
 client.on("message", async message => {
     if (message.author.bot) return;
     if (message.channel.type === "dm") return;
-    if (!message.member.voiceChannel) return message.channel.send('I can\'t find u in any voice channel')
     let prefix = "**";
     let messageArray = message.content.split(" ");
     let command = messageArray[0];
 
 if (command === `${prefix}leave`) {
+		if (!message.member.voiceChannel) return message.channel.send('I can\'t find u in any voice channel')
         message.member.voiceChannel.leave()
     message.channel.send('❌ Okey, leaved your voice channel.')
 };
