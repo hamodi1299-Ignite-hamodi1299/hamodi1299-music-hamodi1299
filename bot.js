@@ -1,4 +1,3 @@
-const botSettings = require("./config.json"); 
 const Discord = require("discord.js");
 const axios = require("axios");
 const yt = require("ytdl-core");
@@ -9,7 +8,6 @@ const path = require('path');
 const version = 'v1.6'; 
 const fetchVideoInfo = require("youtube-info");
 const initcmd = "!";
-const ytApiKey = botSettings.ytApiKey;
 const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
 const botkahrba= ['ID'];
 
