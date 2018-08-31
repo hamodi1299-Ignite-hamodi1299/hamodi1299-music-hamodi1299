@@ -640,7 +640,7 @@ if (command === `${prefix}join`) {
 	message.channel.send({embed: {
             color: 15158332,
             fields: [{
-                name: "✅ joine",
+                name: "✅ join",
                 value: '**Okey, joined your voice channel.**'
               }
             ]
